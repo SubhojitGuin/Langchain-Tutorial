@@ -1,7 +1,7 @@
 # ---- Author : Subhojit Guin ----
 # ---- Date : 16/08/2024 (dd/mm/yyyy) ----
 
-# -- Import Required Packages --
+# ---- Import Required Packages ----
 import sys
 import traceback
 import logging
@@ -39,30 +39,39 @@ from openpyxl import load_workbook
 from openpyxl import Workbook
 import numpy
 import pytesseract
-# import fitz
 import io
 import json
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+LogFilePath = "log\\"
 
 # ---- New Logging Process ----
 def newloggingfunction(BOTName, rundate):
+    
     global print
+    global LogFilePath
+
     logging.basicConfig(level=logging.INFO, format='%(message)s')
     logger = logging.getLogger()
-    path = "log\\" + str(BOTName) + "_" + str(rundate) + "_log.txt"
-    # path = os.path.join("log", str(BOTName), "_", str(rundate), "_log.txt")
-    print(path)
-    logger.addHandler(logging.FileHandler(path, "w"))
+    LogFilePath = "log\\" + str(BOTName) + "_" + str(rundate) + "_log.txt"
+    logger.addHandler(logging.FileHandler(LogFilePath, "w"))
     print = logger.info
     return (logger.info)
 
+# ++++++++++++++++ Changeable variable names +++++++++++++++++
 
-# ------ Changeable Variables ------
+# ------ Version Number ------
 ProdMdfVersion = 'NA'
 DevMdfVersion = '02'
 
 
+# ++++++++++++++++++++++ Main checking +++++++++++++++++++++++
 if __name__ == "__main__":
     print = newloggingfunction("BOT", str(datetime.now().strftime("%Y%m%d")))
+    
+    print(f"Log File Path -- '" + str(LogFilePath) + "'")
 
     print("Hello Langchain")
