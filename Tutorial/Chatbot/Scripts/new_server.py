@@ -23,6 +23,9 @@ from langchain_openai import ChatOpenAI
 from typing_extensions import TypedDict
 
 from langserve import add_routes
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Define the minimum required version as (0, 1, 0)
 # Earlier versions did not allow specifying custom config fields in
